@@ -1,26 +1,30 @@
 import { motion } from 'framer-motion'
+import { SITE } from '../data/site'
 
 export default function Footer() {
   return (
-    <footer className="py-8 border-t border-white/[0.04]">
-      <div className="max-w-4xl mx-auto px-4 text-center">
-        <motion.p
-          className="text-xs text-white/20"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          Built with <span className="text-[#FF6B6B]">❤️</span> by{' '}
-          <span className="text-white/40">VoidX3D</span> &bull; Pokhara, Nepal 🇳🇵
-        </motion.p>
-        <motion.p
-          className="text-[11px] text-white/10 mt-1"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-        >
-          &copy; 2024&ndash;2026 &bull; All projects open source
-        </motion.p>
+    <footer style={{ borderTop: '1px solid var(--border)' }}>
+      <div className="max-w-5xl mx-auto px-4 py-8">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+          <div className="flex gap-4">
+            <a href={SITE.social.github} target="_blank" rel="noopener noreferrer" className="text-xs" style={{ color: 'var(--text-tertiary)' }}>GitHub</a>
+            <a href={SITE.social.x} target="_blank" rel="noopener noreferrer" className="text-xs" style={{ color: 'var(--text-tertiary)' }}>X</a>
+            <a href={SITE.social.instagram} target="_blank" rel="noopener noreferrer" className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Instagram</a>
+            <a href={`mailto:${SITE.email}`} className="text-xs" style={{ color: 'var(--text-tertiary)' }}>Email</a>
+          </div>
+          <div className="flex items-center gap-2 text-xs" style={{ color: 'var(--text-tertiary)' }}>
+            <motion.span
+              className="inline-block w-1.5 h-1.5 rounded-full"
+              style={{ background: 'var(--accent4)' }}
+              animate={{ opacity: [1, 0.3, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            />
+            Available for collaboration
+          </div>
+        </div>
+        <div className="text-center text-[11px]" style={{ color: 'var(--text-quaternary)' }}>
+          Built with <span style={{ color: 'var(--accent3)' }}>❤️</span> by <strong style={{ color: 'var(--text-secondary)' }}>VoidX3D</strong> &bull; Pokhara, Nepal 🇳🇵 &bull; &copy; 2024&ndash;2026
+        </div>
       </div>
     </footer>
   )

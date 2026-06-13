@@ -1,126 +1,82 @@
-import { useEffect, useRef } from 'react'
-import { animate, stagger, scroll, createTimeline } from 'animejs'
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
+import { SITE } from '../data/site'
 
 export default function Hero() {
-  const titleRef = useRef<HTMLHeadingElement>(null)
-  const subtitleRef = useRef<HTMLParagraphElement>(null)
-  const ctaRef = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    const timeline = createTimeline({ defaults: { ease: 'out(3)' } })
-
-    timeline
-      .add(titleRef.current, { opacity: [0, 1], translateY: [30, 0], duration: 800 })
-      .add(subtitleRef.current, { opacity: [0, 1], translateY: [15, 0], duration: 600 }, '-=400')
-      .add(ctaRef.current, { opacity: [0, 1], translateY: [10, 0], duration: 500 }, '-=300')
-
-    return () => timeline.seek(timeline.totalDuration)
-  }, [])
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Haikei-style blob scene decoration */}
-      <div className="haikei-blob" style={{ top: '-20%', right: '-15%', width: '700px', height: '700px' }}>
-        <svg viewBox="0 0 700 700" xmlns="http://www.w3.org/2000/svg">
-          <path d="M350,50C450,50 550,100 600,200C650,300 650,400 600,500C550,600 450,650 350,650C250,650 150,600 100,500C50,400 50,300 100,200C150,100 250,50 350,50Z" fill="url(#blobGrad)" opacity="0.3">
-            <animate attributeName="d" dur="20s" repeatCount="indefinite"
-              values="M350,50C450,50 550,100 600,200C650,300 650,400 600,500C550,600 450,650 350,650C250,650 150,600 100,500C50,400 50,300 100,200C150,100 250,50 350,50Z;
-                      M350,30C480,10 580,120 620,240C660,360 630,480 560,580C490,680 380,650 280,620C180,590 100,500 80,380C60,260 120,130 220,60C270,30 310,40 350,30Z;
-                      M350,50C450,50 550,100 600,200C650,300 650,400 600,500C550,600 450,650 350,650C250,650 150,600 100,500C50,400 50,300 100,200C150,100 250,50 350,50Z"/>
-          </path>
-        </svg>
-      </div>
-
-      <div className="haikei-blob" style={{ bottom: '-20%', left: '-10%', width: '500px', height: '500px' }}>
-        <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-          <path d="M250,30C380,30 470,130 470,250C470,370 380,470 250,470C120,470 30,370 30,250C30,130 120,30 250,30Z" fill="url(#blobGrad2)" opacity="0.2">
-            <animate attributeName="d" dur="15s" repeatCount="indefinite"
-              values="M250,30C380,30 470,130 470,250C470,370 380,470 250,470C120,470 30,370 30,250C30,130 120,30 250,30Z;
-                      M250,50C360,10 490,140 480,260C470,380 370,450 250,460C130,470 40,390 40,270C40,150 140,90 250,50Z;
-                      M250,30C380,30 470,130 470,250C470,370 380,470 250,470C120,470 30,370 30,250C30,130 120,30 250,30Z"/>
-          </path>
-        </svg>
-      </div>
-
-      {/* Haikei layered waves at bottom */}
-      <div className="haikei-waves">
-        <svg viewBox="0 0 1200 200" preserveAspectRatio="none" style={{ width: '100%', height: '100%' }}>
-          <defs>
-            <linearGradient id="waveGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#00D9FF" stopOpacity="0.06" />
-              <stop offset="100%" stopColor="#8A2BE2" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <path d="M0,100 C200,150 400,50 600,100 C800,150 1000,50 1200,100 L1200,200 L0,200 Z" fill="url(#waveGrad)">
-            <animate attributeName="d" dur="12s" repeatCount="indefinite"
-              values="M0,100 C200,150 400,50 600,100 C800,150 1000,50 1200,100 L1200,200 L0,200 Z;
-                      M0,120 C200,60 400,140 600,80 C800,120 1000,70 1200,110 L1200,200 L0,200 Z;
-                      M0,100 C200,150 400,50 600,100 C800,150 1000,50 1200,100 L1200,200 L0,200 Z"/>
-          </path>
-          <path d="M0,140 C200,100 400,160 600,120 C800,80 1000,140 1200,100 L1200,200 L0,200 Z" fill="url(#waveGrad)" opacity="0.5">
-            <animate attributeName="d" dur="15s" repeatCount="indefinite"
-              values="M0,140 C200,100 400,160 600,120 C800,80 1000,140 1200,100 L1200,200 L0,200 Z;
-                      M0,110 C200,150 400,90 600,140 C800,110 1000,150 1200,120 L1200,200 L0,200 Z;
-                      M0,140 C200,100 400,160 600,120 C800,80 1000,140 1200,100 L1200,200 L0,200 Z"/>
-          </path>
-        </svg>
-      </div>
-
       <div className="relative z-10 text-center px-4 max-w-3xl mx-auto">
-        <h1
-          ref={titleRef}
+        <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
+          <p className="text-xs font-mono tracking-[0.3em] uppercase mb-3" style={{ color: 'var(--text-tertiary)' }}>
+            Full Stack Developer &bull; Backend Engineer &bull; AI Builder
+          </p>
+        </motion.div>
+
+        <motion.h1
           className="text-5xl sm:text-7xl md:text-8xl font-black tracking-tight leading-none mb-4 gradient-text"
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           style={{ backgroundSize: '200% 200%' }}
         >
-          VoidX3D
-        </h1>
+          {SITE.name}
+        </motion.h1>
 
-        <p
-          ref={subtitleRef}
-          className="text-sm sm:text-base font-mono text-white/30 tracking-[0.3em] uppercase mb-4"
+        <motion.p
+          className="text-sm sm:text-base max-w-lg mx-auto mb-6 leading-relaxed"
+          style={{ color: 'var(--text-secondary)' }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Full Stack Developer &bull; Backend Engineer &bull; AI Builder
-        </p>
+          {SITE.description}
+        </motion.p>
 
-        <div ref={ctaRef}>
-          <p className="text-white/25 text-sm sm:text-base max-w-lg mx-auto mb-6 leading-relaxed">
-            Shipping production-ready systems, building AI-powered APIs, and crafting open-source tools from Pokhara, Nepal.
-          </p>
+        <motion.div
+          className="flex items-center justify-center gap-2 flex-wrap mb-8"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
+          {[
+            { icon: '🇳🇵', label: 'Pokhara, Nepal' },
+            { icon: '⚡', label: '17 y/o' },
+            { icon: '🎓', label: 'Self-Taught' },
+            { icon: '🎌', label: 'Bleach Fan' },
+          ].map(item => (
+            <span
+              key={item.label}
+              className="px-3 py-1.5 rounded-full text-xs"
+              style={{ background: 'var(--bg-card)', border: '1px solid var(--border)', color: 'var(--text-tertiary)' }}
+            >
+              {item.icon} {item.label}
+            </span>
+          ))}
+        </motion.div>
 
-          <div className="flex items-center justify-center gap-2 flex-wrap mb-8">
-            {[
-              { icon: '🇳🇵', label: 'Pokhara, Nepal' },
-              { icon: '⚡', label: '17 y/o' },
-              { icon: '🎓', label: 'Self-Taught' },
-              { icon: '🎌', label: 'Bleach Fan' },
-            ].map((item, i) => (
-              <span
-                key={item.label}
-                className="px-3 py-1.5 rounded-full bg-white/[0.02] border border-white/[0.06] text-white/30 text-xs"
-                style={{ animationDelay: `${i * 0.1}s` }}
-              >
-                {item.icon} {item.label}
-              </span>
-            ))}
-          </div>
-
-          <motion.a
-            href="#projects"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-white/10 bg-white/[0.02] text-white/40 text-sm hover:border-[#00D9FF]/30 hover:text-white/70 hover:bg-[#00D9FF]/[0.03] transition-all"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
-            onClick={(e) => {
-              e.preventDefault()
-              document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
-            }}
-          >
+        <motion.div
+          className="flex items-center justify-center gap-3 flex-wrap"
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
+          <Link to="/projects" className="btn-primary">
             Explore Projects
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
-          </motion.a>
-        </div>
+          </Link>
+
+          <a href={SITE.social.github} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ borderColor: 'var(--border)', background: 'var(--bg-card)', color: 'var(--text-secondary)' }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.42 2.87 8.17 6.84 9.5.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.71-2.78.6-3.37-1.34-3.37-1.34-.45-1.15-1.11-1.46-1.11-1.46-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.28.1-2.66 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0112 6.8c.85 0 1.71.12 2.51.35 1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.41.1 2.66.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.94.36.31.68.92.68 1.85 0 1.34-.01 2.42-.01 2.75 0 .27.18.58.69.48A10.04 10.04 0 0022 12c0-5.52-4.48-10-10-10z"/></svg>
+            GitHub
+          </a>
+
+          <a href={SITE.social.x} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ borderColor: 'var(--border)', background: 'var(--bg-card)', color: 'var(--text-secondary)' }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+            X
+          </a>
+        </motion.div>
       </div>
 
       {/* Scroll indicator */}
@@ -128,11 +84,12 @@ export default function Hero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
+        transition={{ delay: 1 }}
       >
-        <div className="w-4 h-7 rounded-full border border-white/10 flex items-start justify-center p-1">
+        <div className="w-4 h-7 rounded-full flex items-start justify-center p-1" style={{ border: '1px solid var(--border)' }}>
           <motion.div
-            className="w-1 h-1.5 rounded-full bg-white/30"
+            className="w-1 h-1.5 rounded-full"
+            style={{ background: 'var(--text-quaternary)' }}
             animate={{ y: [0, 10, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
           />
