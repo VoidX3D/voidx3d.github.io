@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoidX3D · Full Stack Developer &amp; Backend Engineer</title>
+  <meta name="description" content="Full-stack developer from Pokhara, Nepal building production-ready systems, AI-powered APIs, and open-source tools. React, TypeScript, Supabase, Tailwind CSS." />
+  <meta name="keywords" content="VoidX3D, developer, full stack, backend, Nepal, Pokhara, React, TypeScript, Supabase" />
+  <meta property="og:title" content="VoidX3D · Full Stack Developer & Backend Engineer" />
+  <meta property="og:description" content="Building production-ready systems, AI-powered APIs, and open-source tools from Pokhara, Nepal." />
+  <meta property="og:url" content="https://voidx3d.github.io" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VoidX3D · Full Stack Developer & Backend Engineer" />
+  <meta name="twitter:description" content="Building production-ready systems, AI-powered APIs, and open-source tools from Pokhara, Nepal." />
+  <link rel="canonical" href="https://voidx3d.github.io" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #0d1117;
+      --surface: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --text-secondary: #8b949e;
+      --accent: #00D9FF;
+      --accent2: #8A2BE2;
+      --accent3: #FF6B6B;
+      --radius: 12px;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+    a { color: var(--accent); text-decoration: none; transition: color .2s; }
+    a:hover { color: #fff; }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      background: rgba(13,17,23,.85); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+    }
+    nav .container { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    nav .logo { font-weight: 700; font-size: 1.1rem; color: #fff; letter-spacing: 1px; }
+    nav .logo span { color: var(--accent); }
+    nav a:not(.logo) { font-size: .875rem; color: var(--text-secondary); margin-left: 24px; }
+    nav a:not(.logo):hover { color: #fff; }
+
+    /* Hero */
+    .hero {
+      padding: 140px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+      background: radial-gradient(circle at 50% 50%, rgba(0,217,255,.04) 0%, transparent 50%);
+      animation: pulse 8s ease-in-out infinite;
+    }
+    @keyframes pulse { 50% { transform: scale(1.2); opacity: .6; } }
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent), var(--accent2), var(--accent3));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -1px;
+      position: relative;
+    }
+    .hero .subtitle {
+      font-size: 1.1rem; color: var(--text-secondary); margin-top: 16px;
+      font-family: 'Courier New', monospace; letter-spacing: 3px;
+    }
+    .hero .tagline {
+      font-size: .95rem; color: var(--text-secondary); margin-top: 12px;
+      max-width: 600px; margin-inline: auto; opacity: .7;
+    }
+    .hero .meta {
+      margin-top: 24px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;
+    }
+    .hero .meta span {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 6px 16px; border-radius: 20px;
+      background: var(--surface); border: 1px solid var(--border);
+      font-size: .8rem; color: var(--text-secondary);
+    }
+
+    /* Section */
+    section { padding: 60px 0; }
+    section h2 {
+      font-size: 1.5rem; font-weight: 700; margin-bottom: 32px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    section h2::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+
+    /* Projects */
+    .project-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px;
+    }
+    .project-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 20px; transition: all .2s; cursor: pointer;
+    }
+    .project-card:hover {
+      border-color: var(--accent); transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,217,255,.08);
+    }
+    .project-card .name {
+      font-weight: 600; font-size: 1rem; color: #fff;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .project-card .name .lang {
+      font-size: .65rem; font-weight: 500; padding: 2px 8px;
+      border-radius: 10px; background: rgba(0,217,255,.1);
+      color: var(--accent); text-transform: uppercase; letter-spacing: .5px;
+    }
+    .project-card p { font-size: .85rem; color: var(--text-secondary); margin-top: 8px; }
+    .project-card .stats {
+      margin-top: 12px; display: flex; gap: 12px; font-size: .78rem; color: var(--text-secondary);
+    }
+    .project-card .stats span { display: flex; align-items: center; gap: 4px; }
+
+    /* Featured section bigger */
+    .featured-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px; }
+    .featured-card {
+      background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+      padding: 24px; transition: all .2s; position: relative; overflow: hidden;
+    }
+    .featured-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+    }
+    .featured-card:hover {
+      border-color: var(--accent); transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,217,255,.1);
+    }
+    .featured-card .name { font-weight: 700; font-size: 1.1rem; color: #fff; }
+    .featured-card .name .stars { color: #f0c040; font-weight: 400; font-size: .9rem; }
+    .featured-card p { font-size: .875rem; color: var(--text-secondary); margin-top: 10px; }
+    .featured-card .lang {
+      display: inline-block; font-size: .7rem; font-weight: 600; padding: 3px 10px;
+      border-radius: 10px; background: rgba(138,43,226,.15); color: var(--accent2);
+      text-transform: uppercase; letter-spacing: .5px; margin-top: 12px;
+    }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+    @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } }
+    .about-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+    }
+    .about-card h3 { font-size: 1rem; font-weight: 600; margin-bottom: 12px; color: #fff; }
+    .about-card ul { list-style: none; }
+    .about-card li {
+      padding: 6px 0; font-size: .875rem; color: var(--text-secondary);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .about-card li::before { content: '›'; color: var(--accent); font-weight: 700; }
+
+    /* Social */
+    .social { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; margin-top: 20px; }
+    .social a {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 10px 20px; border-radius: var(--radius);
+      background: var(--surface); border: 1px solid var(--border);
+      color: var(--text-secondary); font-size: .875rem; transition: all .2s;
+    }
+    .social a:hover {
+      border-color: var(--accent); color: #fff; background: rgba(0,217,255,.06);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center; padding: 40px 0; border-top: 1px solid var(--border);
+      color: var(--text-secondary); font-size: .8rem;
+    }
+    footer .heart { color: var(--accent3); }
+
+    /* Stats bar */
+    .stats-bar {
+      display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+      padding: 20px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    }
+    .stats-bar .stat { text-align: center; }
+    .stats-bar .stat .num {
+      font-size: 1.5rem; font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .stats-bar .stat .label { font-size: .75rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+    /* filter */
+    .filter-bar { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+    .filter-bar button {
+      padding: 6px 16px; border-radius: 20px; border: 1px solid var(--border);
+      background: var(--surface); color: var(--text-secondary); font-size: .8rem;
+      cursor: pointer; transition: all .2s;
+    }
+    .filter-bar button:hover { border-color: var(--accent); color: #fff; }
+    .filter-bar button.active { background: rgba(0,217,255,.1); border-color: var(--accent); color: var(--accent); }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <a href="/" class="logo">void<span>x</span>3d</a>
+      <div>
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="https://github.com/VoidX3D" target="_blank">GitHub</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <h1>VoidX3D</h1>
+      <div class="subtitle">FULL STACK DEVELOPER &bull; BACKEND ENGINEER &bull; AI BUILDER</div>
+      <p class="tagline">
+        Shipping production-ready systems, building AI-powered APIs, and crafting open-source tools from Pokhara, Nepal.
+      </p>
+      <div class="meta">
+        <span>🇳🇵 Pokhara, Nepal</span>
+        <span>⚡ 3+ Years</span>
+        <span>🎂 17 y/o</span>
+        <span>🎓 Motherland Secondary School</span>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats-bar" id="stats-bar">
+      <div class="stat"><div class="num" id="repo-count">—</div><div class="label">Repos</div></div>
+      <div class="stat"><div class="num" id="star-count">—</div><div class="label">Stars</div></div>
+      <div class="stat"><div class="num" id="follower-count">—</div><div class="label">Followers</div></div>
+      <div class="stat"><div class="num" id="commit-count">—</div><div class="label">Commits</div></div>
+    </div>
+
+    <!-- Featured Projects -->
+    <section id="featured">
+      <h2>🌟 Featured</h2>
+      <div class="featured-grid" id="featured-grid"></div>
+    </section>
+
+    <!-- All Projects -->
+    <section id="projects">
+      <h2>📦 All Projects</h2>
+      <div class="filter-bar" id="filter-bar"></div>
+      <div class="project-grid" id="project-grid"></div>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+      <h2>⚡ About</h2>
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>👤 Profile</h3>
+          <ul>
+            <li>Full Stack Developer & Backend Engineer</li>
+            <li>17 years old, self-taught since age 12</li>
+            <li>14+ programming languages</li>
+            <li>Building production-ready systems</li>
+            <li>Always shipping, always learning</li>
+            <li>Anime fan (Bleach is peak)</li>
+          </ul>
+        </div>
+        <div class="about-card">
+          <h3>🎯 Current Focus</h3>
+          <ul>
+            <li>Backend Architecture & System Design</li>
+            <li>AI/ML Integration into Production Apps</li>
+            <li>Real-time Applications & APIs</li>
+            <li>Microservices & Event-Driven Architecture</li>
+            <li>Open Source Contributions</li>
+            <li>Performance Optimization</li>
+          </ul>
+        </div>
+        <div class="about-card">
+          <h3>🛠️ Tech Stack</h3>
+          <ul>
+            <li>TypeScript, JavaScript, Python, Go, Rust</li>
+            <li>React, Next.js, Vue, Svelte, Tailwind</li>
+            <li>Node.js, Express, NestJS, FastAPI</li>
+            <li>PostgreSQL, MongoDB, Redis, Supabase</li>
+            <li>Docker, K8s, AWS, GCP, Vercel</li>
+            <li>TensorFlow, PyTorch, OpenCV, LangChain</li>
+          </ul>
+        </div>
+        <div class="about-card">
+          <h3>🌐 Connect</h3>
+          <ul>
+            <li><a href="https://github.com/VoidX3D" target="_blank">GitHub &mdash; VoidX3D</a></li>
+            <li><a href="https://x.com/VortexVoidX3D" target="_blank">X &mdash; @VortexVoidX3D</a></li>
+            <li><a href="https://www.instagram.com/sincerebhattarai/" target="_blank">Instagram &mdash; @sincerebhattarai</a></li>
+            <li><a href="mailto:playzspreston2@gmail.com">Email &mdash; playzspreston2@gmail.com</a></li>
+            <li><a href="https://ubuntu-sincere.vercel.app/" target="_blank">Portfolio &mdash; ubuntu-sincere.vercel.app</a></li>
+            <li><a href="https://ruclub.rweb.site" target="_blank">RU Club Motherland &mdash; ruclub.rweb.site</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social -->
+    <div class="social">
+      <a href="https://github.com/VoidX3D" target="_blank">🐙 GitHub</a>
+      <a href="https://x.com/VortexVoidX3D" target="_blank">𝕏 X</a>
+      <a href="https://www.instagram.com/sincerebhattarai/" target="_blank">📸 Instagram</a>
+      <a href="mailto:playzspreston2@gmail.com" target="_blank">✉️ Email</a>
+      <a href="https://ubuntu-sincere.vercel.app/" target="_blank">🌐 Portfolio</a>
+      <a href="https://www.buymeacoffee.com/voidx3d" target="_blank">☕ Buy Me a Coffee</a>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Built with <span class="heart">❤️</span> by <strong>VoidX3D</strong> &bull; Pokhara, Nepal 🇳🇵</p>
+      <p style="margin-top:4px">&copy; 2024&ndash;2026 &bull; All projects open source</p>
+    </div>
+  </footer>
+
+  <script>
+    const GITHUB_USER = 'VoidX3D'
+
+    async function fetchJSON(url) {
+      const res = await fetch(url)
+      if (!res.ok) throw new Error(res.statusText)
+      return res.json()
+    }
+
+    async function loadStats() {
+      try {
+        const user = await fetchJSON(`https://api.github.com/users/${GITHUB_USER}`)
+        document.getElementById('repo-count').textContent = user.public_repos
+        document.getElementById('follower-count').textContent = user.followers
+
+        // Count total stars across all repos
+        let page = 1, totalStars = 0, totalCommits = 0
+        while (page < 5) {
+          const repos = await fetchJSON(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&page=${page}&sort=updated`)
+          if (!repos.length) break
+          repos.forEach(r => { totalStars += r.stargazers_count })
+          page++
+        }
+        document.getElementById('star-count').textContent = totalStars
+
+        // Count commits via events (approximate)
+        try {
+          const events = await fetchJSON(`https://api.github.com/users/${GITHUB_USER}/events?per_page=100`)
+          const pushEvents = events.filter(e => e.type === 'PushEvent')
+          totalCommits = pushEvents.reduce((sum, e) => sum + (e.payload.commits?.length || 0), 0)
+        } catch {}
+        document.getElementById('commit-count').textContent = totalCommits > 0 ? totalCommits + '+' : '—'
+      } catch {
+        document.querySelectorAll('.stats-bar .stat .num').forEach(el => el.textContent = '—')
+      }
+    }
+
+    async function loadProjects() {
+      try {
+        let allRepos = []
+        let page = 1
+        while (page < 10) {
+          const repos = await fetchJSON(`https://api.github.com/users/${GITHUB_USER}/repos?per_page=100&page=${page}&sort=updated&type=public`)
+          if (!repos.length) break
+          allRepos = allRepos.concat(repos)
+          page++
+        }
+
+        // Filter out the profile repo
+        allRepos = allRepos.filter(r => r.name !== GITHUB_USER)
+
+        // Sort by stars (own repos first, then forks)
+        allRepos.sort((a, b) => {
+          if (a.fork !== b.fork) return a.fork ? 1 : -1
+          return b.stargazers_count - a.stargazers_count
+        })
+
+        // Featured = top 6 by stars (excluding forks)
+        const featured = allRepos.filter(r => !r.fork).sort((a, b) => b.stargazers_count - a.stargazers_count).slice(0, 6)
+        const rest = allRepos.filter(r => !featured.includes(r))
+
+        renderFeatured(featured)
+        renderProjects(rest)
+        renderFilters(rest)
+      } catch (err) {
+        document.getElementById('featured-grid').innerHTML = '<p>Failed to load projects.</p>'
+        document.getElementById('project-grid').innerHTML = ''
+      }
+    }
+
+    function renderFeatured(repos) {
+      const grid = document.getElementById('featured-grid')
+      if (!repos.length) { grid.innerHTML = '<p>No featured projects yet.</p>'; return }
+
+      grid.innerHTML = repos.map(r => `
+        <a href="${r.html_url}" target="_blank" class="featured-card">
+          <div class="name">
+            ${r.name}
+            <span class="stars">${r.stargazers_count > 0 ? '★' + r.stargazers_count : ''}</span>
+          </div>
+          <p>${r.description || 'No description'}</p>
+          ${r.language ? `<span class="lang">${r.language}</span>` : ''}
+        </a>
+      `).join('')
+    }
+
+    function renderFilters(repos) {
+      const langs = [...new Set(repos.map(r => r.language).filter(Boolean))]
+      const bar = document.getElementById('filter-bar')
+      bar.innerHTML = '<button class="active" data-lang="all">All</button>' +
+        langs.map(l => `<button data-lang="${l}">${l}</button>`).join('')
+
+      bar.querySelectorAll('button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          bar.querySelectorAll('button').forEach(b => b.classList.remove('active'))
+          btn.classList.add('active')
+          filterProjects(btn.dataset.lang)
+        })
+      })
+    }
+
+    function filterProjects(lang) {
+      document.querySelectorAll('#project-grid .project-card').forEach(card => {
+        if (lang === 'all' || card.dataset.lang === lang) {
+          card.classList.remove('hidden')
+        } else {
+          card.classList.add('hidden')
+        }
+      })
+    }
+
+    function renderProjects(repos) {
+      const grid = document.getElementById('project-grid')
+      if (!repos.length) { grid.innerHTML = '<p>No more projects.</p>'; return }
+
+      grid.innerHTML = repos.map(r => `
+        <a href="${r.html_url}" target="_blank" class="project-card" data-lang="${r.language || 'unknown'}">
+          <div class="name">
+            ${r.name}
+            ${r.language ? `<span class="lang">${r.language}</span>` : ''}
+          </div>
+          <p>${r.description || 'No description'}</p>
+          <div class="stats">
+            <span>★ ${r.stargazers_count}</span>
+            ${r.fork ? '<span>⑂ fork</span>' : ''}
+          </div>
+        </a>
+      `).join('')
+    }
+
+    // Smooth scroll for nav
+    document.querySelectorAll('nav a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        e.preventDefault()
+        const el = document.querySelector(a.getAttribute('href'))
+        if (el) el.scrollIntoView({ behavior: 'smooth' })
+      })
+    })
+
+    loadStats()
+    loadProjects()
+  </script>
+</body>
+</html>
