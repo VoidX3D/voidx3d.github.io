@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+:root {
+  --accent: #00D9FF;
+  --accent2: #8A2BE2;
+  --accent3: #FF6B6B;
+  --accent4: #00ff88;
+  --bg: #0a0a0f;
+  --surface: rgba(255,255,255,0.03);
+  --surface2: rgba(255,255,255,0.06);
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(255,255,255,0.12);
+  --text: rgba(255,255,255,0.85);
+  --text-secondary: rgba(255,255,255,0.4);
+  --text-tertiary: rgba(255,255,255,0.2);
+}
+
+html { scroll-behavior: smooth; scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.08) transparent; }
+body { background: var(--bg); }
+
+::selection { background: rgba(0,217,255,0.2); color: #fff; }
+
+/* ── Shader gradient background ── */
+.shader-bg {
+  position: fixed; inset: 0; z-index: 0; overflow: hidden; pointer-events: none;
+}
+.shader-bg .orb {
+  position: absolute; border-radius: 50%; filter: blur(80px);
+  animation: orbFloat 20s ease-in-out infinite;
+}
+.shader-bg .orb:nth-child(1) {
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, #00D9FF 0%, transparent 70%);
+  top: -10%; left: -10%; animation-delay: 0s;
+}
+.shader-bg .orb:nth-child(2) {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #8A2BE2 0%, transparent 70%);
+  bottom: -15%; right: -5%; animation-delay: -7s;
+}
+.shader-bg .orb:nth-child(3) {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, #FF6B6B 0%, transparent 70%);
+  top: 40%; left: 50%; animation-delay: -14s;
+}
+.shader-bg .orb:nth-child(4) {
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, #00ff88 0%, transparent 70%);
+  top: -5%; right: 25%; animation-delay: -5s; opacity: 0.15;
+}
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  25% { transform: translate(50px,-30px) scale(1.05); }
+  50% { transform: translate(-20px,40px) scale(0.95); }
+  75% { transform: translate(30px,20px) scale(1.02); }
+}
+
+/* ── Haikei Blob Scene ── */
+.haikei-blob {
+  position: absolute; pointer-events: none; opacity: 0.04;
+}
+.haikei-blob svg { width: 100%; height: 100%; }
+
+/* ── Haikei Layered Waves ── */
+.haikei-waves {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
+  pointer-events: none; opacity: 0.03;
+}
+
+/* ── Particle field ── */
+.particle-field {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
+.particle {
+  position: absolute; width: 2px; height: 2px;
+  background: rgba(255,255,255,0.3); border-radius: 50%;
+  animation: particleDrift linear infinite;
+}
+@keyframes particleDrift {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.4; }
+  100% { transform: translateY(-10vh) scale(0.5); opacity: 0; }
+}
+
+/* ── Math curve SVG ── */
+.math-curve {
+  position: absolute; pointer-events: none; opacity: 0.06;
+}
+
+/* ── Spotlight ── */
+.spotlight-wrap {
+  position: relative; overflow: hidden;
+}
+.spotlight {
+  position: absolute; width: 600px; height: 600px;
+  border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle, rgba(0,217,255,0.08) 0%, transparent 70%);
+  transform: translate(-50%,-50%);
+  transition: opacity 0.3s;
+}
+
+/* ── Card glow ── */
+.card-glow {
+  position: relative; transition: all 0.3s ease;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.card-glow:hover {
+  border-color: rgba(0,217,255,0.2);
+  box-shadow: 0 0 40px rgba(0,217,255,0.04), 0 0 80px rgba(138,43,226,0.03);
+}
+
+/* ── Filter buttons ── */
+.filter-btn {
+  padding: 5px 16px; border-radius: 9999px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02); color: rgba(255,255,255,0.4);
+  font-size: 0.75rem; cursor: pointer;
+  transition: all 0.2s; font-family: inherit;
+}
+.filter-btn:hover { border-color: rgba(0,217,255,0.3); color: #fff; }
+.filter-btn.active {
+  background: rgba(0,217,255,0.08); border-color: #00D9FF; color: #00D9FF;
+}
+
+/* ── Scrollbar ── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.06); border-radius: 2px; }
+
+/* ── Gradient text utility ── */
+.gradient-text {
+  background: linear-gradient(135deg, #00D9FF, #8A2BE2, #FF6B6B);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ── Grid pattern overlay ── */
+.grid-overlay {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image: radial-gradient(rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
