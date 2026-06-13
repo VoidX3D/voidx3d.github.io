@@ -31,7 +31,7 @@ export default function ProjectGrid({ repos, featured, languages }: Props) {
         )}
 
         <div className="flex items-center justify-between gap-4 mb-5" ref={headerRef}>
-          <p className="section-label" style={{ marginBottom: 0 }}>All Projects <span style={{ color: 'var(--text-quaternary)', fontWeight: 400 }}>({repos.length})</span></p>
+          <p className="section-label" style={{ marginBottom: 0 }}>All Projects <span style={{ color: 'var(--text-tertiary)', fontWeight: 400 }}>({repos.length})</span></p>
           <div className="flex gap-1.5 flex-wrap justify-end">
             <button className={`filter-btn ${filter === 'all' ? 'active' : ''}`} onClick={() => setFilter('all')}>All</button>
             {languages.map(lang => (

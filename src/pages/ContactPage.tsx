@@ -36,8 +36,8 @@ export default function ContactPage() {
             { label: 'X', value: '@VortexVoidX3D', href: SITE.social.x },
           ].map(item => (
             <a key={item.label} href={item.href} target="_blank" rel="noopener noreferrer" className="card p-4 text-center hover:-translate-y-1 transition-transform">
-              <div className="text-xs font-semibold gradient-text">{item.label}</div>
-              <div className="text-xs mt-1" style={{ color: 'var(--text-tertiary)' }}>{item.value}</div>
+              <div className="text-sm font-semibold gradient-text">{item.label}</div>
+              <div className="text-sm mt-1" style={{ color: 'var(--text-secondary)' }}>{item.value}</div>
             </a>
           ))}
         </motion.div>

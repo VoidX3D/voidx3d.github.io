@@ -31,10 +31,10 @@ export default function Timeline() {
                 <span className="text-xs font-semibold" style={{ color: 'var(--accent)' }}>{item.year}</span>
               </div>
               <h3 className="text-sm font-semibold mb-1" style={{ color: 'var(--text)' }}>{item.title}</h3>
-              <p className="text-xs leading-relaxed mb-2" style={{ color: 'var(--text-secondary)' }}>{item.description}</p>
+              <p className="text-sm leading-relaxed mb-2" style={{ color: 'var(--text-secondary)' }}>{item.description}</p>
               <div className="flex gap-1.5 flex-wrap">
                 {item.tags.map(tag => (
-                  <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full" style={{ background: 'var(--bg-elevated)', color: 'var(--text-tertiary)' }}>{tag}</span>
+                  <span key={tag} className="text-xs px-2 py-0.5 rounded-full" style={{ background: 'var(--bg-elevated)', color: 'var(--text-tertiary)' }}>{tag}</span>
                 ))}
               </div>
             </motion.div>

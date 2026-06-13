@@ -1,28 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
+import { useContributions } from '../hooks/useContributions'
 
 export default function Activity() {
-  const [contribs, setContribs] = useState<{ date: string; count: number }[]>([])
-  const days = 91
-
-  useEffect(() => {
-    const end = new Date()
-    const data: { date: string; count: number }[] = []
-    for (let i = days - 1; i >= 0; i--) {
-      const d = new Date(end)
-      d.setDate(d.getDate() - i)
-      data.push({
-        date: d.toISOString().slice(0, 10),
-        count: Math.random() < 0.5 ? 0 : Math.floor(Math.random() * 12),
-      })
-    }
-    setContribs(data)
-  }, [])
-
-  const weeks: typeof contribs[] = []
-  for (let i = 0; i < contribs.length; i += 7) {
-    weeks.push(contribs.slice(i, i + 7))
-  }
+  const { weeks, total, loading } = useContributions('VoidX3D')
 
   function intensity(count: number): string {
     if (count === 0) return 'var(--bg-elevated)'
@@ -48,30 +28,40 @@ export default function Activity() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <div className="flex gap-[3px] overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
-            {weeks.map((week, wi) => (
-              <div key={wi} className="flex flex-col gap-[3px]">
-                {week.map(day => (
-                  <div
-                    key={day.date}
-                    className="w-[10px] h-[10px] rounded-sm"
-                    style={{ backgroundColor: intensity(day.count) }}
-                    title={`${day.date}: ${day.count} contributions`}
-                  />
-                ))}
-                {week.length < 7 && Array.from({ length: 7 - week.length }).map((_, i) => (
-                  <div key={`empty-${i}`} className="w-[10px] h-[10px] rounded-sm" style={{ backgroundColor: 'transparent' }} />
+          {loading ? (
+            <div className="flex items-center justify-center py-8">
+              <div className="w-5 h-5 rounded-full" style={{ border: '2px solid var(--border)', borderTopColor: 'var(--accent)' }}>
+                <div className="w-full h-full rounded-full" style={{ animation: 'spin 0.6s linear infinite', borderTop: '2px solid var(--accent)', borderRadius: '50%' }} />
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="flex items-center gap-2 mb-4 text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                <span>{total.toLocaleString()} contributions in {new Date().getFullYear()}</span>
+              </div>
+              <div className="flex gap-[3px] overflow-x-auto pb-2" style={{ scrollbarWidth: 'none' }}>
+                {weeks.map((week, wi) => (
+                  <div key={wi} className="flex flex-col gap-[3px]">
+                    {week.map(day => (
+                      <div
+                        key={day.date}
+                        className="w-[11px] h-[11px] rounded-sm"
+                        style={{ backgroundColor: intensity(day.count) }}
+                        title={`${day.date}: ${day.count} contribution${day.count !== 1 ? 's' : ''}`}
+                      />
+                    ))}
+                  </div>
                 ))}
               </div>
-            ))}
-          </div>
-          <div className="flex items-center gap-1 mt-3 text-[10px]" style={{ color: 'var(--text-tertiary)' }}>
-            <span>Less</span>
-            {[0, 3, 6, 9, 12].map(n => (
-              <div key={n} className="w-[10px] h-[10px] rounded-sm" style={{ backgroundColor: intensity(n) }} />
-            ))}
-            <span>More</span>
-          </div>
+              <div className="flex items-center gap-1 mt-3 text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                <span>Less</span>
+                {[0, 3, 6, 9, 12].map(n => (
+                  <div key={n} className="w-[11px] h-[11px] rounded-sm" style={{ backgroundColor: intensity(n) }} />
+                ))}
+                <span>More</span>
+              </div>
+            </>
+          )}
         </motion.div>
       </div>
     </section>

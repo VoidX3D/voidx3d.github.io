@@ -2,7 +2,7 @@ import { useGithubData } from '../hooks/useGithubData'
 import Hero from '../components/Hero'
 import StatsBar from '../components/StatsBar'
 import ProjectGrid from '../components/ProjectGrid'
-import Skills from '../components/Skills'
+import Skills, { computeLanguageStats } from '../components/Skills'
 import Timeline from '../components/Timeline'
 import DistroShowcase from '../components/DistroShowcase'
 import Activity from '../components/Activity'
@@ -10,6 +10,7 @@ import Contact from '../components/Contact'
 
 export default function Home() {
   const { user, repos, featured, totalStars, languages, loading } = useGithubData('VoidX3D')
+  const langStats = repos.length > 0 ? computeLanguageStats(repos) : undefined
 
   if (loading) {
     return (
@@ -38,7 +39,7 @@ export default function Home() {
         following={user?.following ?? 0}
       />
       <ProjectGrid repos={repos} featured={featured} languages={languages} />
-      <Skills />
+      <Skills languageStats={langStats} />
       <Timeline />
       <DistroShowcase />
       <Activity />
